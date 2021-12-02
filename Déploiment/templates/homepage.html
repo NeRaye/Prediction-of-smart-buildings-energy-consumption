@@ -22,8 +22,6 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-      
-
         <title>EnergyDash</title>
     </head>
     <body>
@@ -49,7 +47,7 @@
             <nav class="nav__container">
                 <div>
                     <a href="#" class="nav__link nav__logo">
-                        <i class="fas fa-leaf" ></i>
+                        <i class="fas fa-leaf" style="color: #eb8f34"></i>
                         <span class="nav__logo-name" >EnergyDash for IMPROVEMENT</span>
                     </a>
     
@@ -87,7 +85,7 @@
                             </div>
 
                             <div class="nav__dropdown">
-                                <a href="/ELECT" class="nav__link" >
+                                <a href="/ELECT" class="nav__link">
                                     <i class='fas fa-bolt' ></i>
                                     <span class="nav__name">Electricity</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -97,7 +95,7 @@
                             </div>
 
                             <div class="nav__dropdown">
-                                <a href="/MAJ" class="nav__link" style="color: #eb8f34">
+                                <a href="/MAJ" class="nav__link">
                                     <i class="fas fa-recycle"></i>
                                     <span class="nav__name">Retrain models</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -120,52 +118,22 @@
 
         <!--========== CONTENTS ==========-->
         <main>
-            
-            <div id="loading">
-                <div>
-                    <svg width="200" height="200">
-                        <circle class="outer" id="border" cx="100" cy="100" r="50" stroke-linecap="round" />
-                    </svg>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h1 class="text-center">Data range for 1 hour observations</h1>
+                        <h3 class="text-center">FROM {{ dataToRender1 }}!</h3>
+                        <h3 class="text-center">TO {{ dataToRender2 }}!</h3>
+                    </div>
+                </br>
+                    <div class="card">
+                        <h1 class="text-center" >Data range for 24 hours observations</h1>
+                        <h3 class="text-center">FROM {{ dataToRender3 }}!</h3>
+                        <h3 class="text-center">TO {{ dataToRender4 }}!</h3>
+                    </div>
+                    
                 </div>
-                <div id="innerText">Loading</div>
             </div>
-
-            <script>
-                function reset(){
-                $("#loading").removeClass("done").attr("onClick", "").children("#innerText").unbind('mouseenter mouseleave').html("Loading");
-                setTimeout(function(){complete()}, (Math.floor(Math.random() * 30000000) + 500));   
-            }
-            
-            reset();
-            
-            function complete(){
-                $("#loading").addClass("done").children("div").each(function(){
-                    $(this).attr("onClick", "reset();");
-                });
-                $("#loading>#innerText").fadeOut(function(){
-                    $(this).html("Models trained successfully").fadeIn(function(){
-                        $("#loading>#innerText").hover(function(){
-                            loadingButtonHover($(this));
-                        })
-                        $("#loading>div>svg>#border").hover(function(){
-                            loadingButtonHover($(this));
-                        })
-                    });
-                });
-            }
-            
-            //hardcoded hover effect on loading/start button
-            function loadingButtonHover(element){
-                $("#loading>div>svg>#border").addClass("hovered");
-                $("#loading>#innerText").addClass("hovered");
-                element.mouseout(function(){
-                    $("#loading>div>svg>#border").removeClass("hovered");
-                    $("#loading>#innerText").removeClass("hovered");
-                })
-            }
-
-            </script>
-            
             
         </main>
 
@@ -173,5 +141,11 @@
         <script src="/static/js/main.js"></script>
     </body>
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graph = {{graphJSON | safe}};
+        Plotly.plot("chart",graph,{});
+        
+    </script>
 
 </html>

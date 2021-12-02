@@ -22,8 +22,6 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-      
-
         <title>EnergyDash</title>
     </head>
     <body>
@@ -49,8 +47,8 @@
             <nav class="nav__container">
                 <div>
                     <a href="#" class="nav__link nav__logo">
-                        <i class="fas fa-leaf" ></i>
-                        <span class="nav__logo-name" >EnergyDash for IMPROVEMENT</span>
+                        <i class="fas fa-leaf"></i>
+                        <span class="nav__logo-name">EnergyDash for IMPROVEMENT</span>
                     </a>
     
                     <div class="nav__list">
@@ -58,7 +56,7 @@
                             <h3 class="nav__subtitle">MENU</h3>
                             
                             <div class="nav__dropdown" >
-                                <a href="/GAS1" class="nav__link" >
+                                <a href="/GAS1" class="nav__link">
                                     <i class='fas fa-burn' ></i>
                                     <span class="nav__name"  >Boiler 01</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -87,7 +85,7 @@
                             </div>
 
                             <div class="nav__dropdown">
-                                <a href="/ELECT" class="nav__link" >
+                                <a href="/ELECT" class="nav__link" style="color: #eb8f34">
                                     <i class='fas fa-bolt' ></i>
                                     <span class="nav__name">Electricity</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -97,7 +95,7 @@
                             </div>
 
                             <div class="nav__dropdown">
-                                <a href="/MAJ" class="nav__link" style="color: #eb8f34">
+                                <a href="/MAJ" class="nav__link">
                                     <i class="fas fa-recycle"></i>
                                     <span class="nav__name">Retrain models</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -121,51 +119,89 @@
         <!--========== CONTENTS ==========-->
         <main>
             
-            <div id="loading">
-                <div>
-                    <svg width="200" height="200">
-                        <circle class="outer" id="border" cx="100" cy="100" r="50" stroke-linecap="round" />
-                    </svg>
+           
+                <div class="row ">
+                    <div class="col-md-4 col-sm-12 "> 
+                         <!--a form with name, gender select element and date of birth--> 
+                       <div class="card "  style="height: 650px; !important">
+                        <form method="POST" action="{{ url_for('ELECTresponse') }}" >
+                            <div class="form-group row ">
+                                </br> </br></br></br> 
+                                <div >
+                                </br>
+                                    <h4 style="text-align: center;color:#BB2D3B;font-weight: bold;">Visualization/Prediction</h4>
+                                </div>
+                                <div class="col-md-10 offset-1">
+                                    
+                                        <p>Operation</p>
+                                       
+                                        <select style="font-size: 15px;" id="selector1" name="selector1" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option selected >Select Operation</option>
+                                            <option value="Visualization">Visualization</option>
+                                            <option value="Prediction">Prediction</option>
+                                          </select>
+                                          
+                                        <!--select element with 4 items to select-->
+                                        
+                                    
+                                  
+                                </div>
+                                </br></br> </br></br> </br>
+                                <div class="col-md-10 offset-1">
+                                    
+                                        <p>Temporal granularity</p>
+                                        <select   style="font-size: 15px;" id="selector2" name="selector2" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option selected>Select Temporal granularity</option>
+                                            <option value="Hour">Hour</option>
+                                            <option value="Day">Day</option>
+                                            <option value="Week">Week</option>
+                                            <option value="Month">Month</option>
+                                          </select>
+                                      
+                                    
+                                </div>
+                                 </br> </br></br></br> </br>
+                                <div class="col-md-10 offset-1">
+                                   
+                                        <p>Start date</p>
+                                     
+                                        <input style="font-size: 15px;" class="form-control" id="date1" name="date1" placeholder="MM/DD/YYY" type="datetime-local"/>
+
+                                </div>
+                            </br> </br></br></br> </br>
+                                <div class="col-md-10 offset-1">
+                                   
+                                    <p>End date</p>
+                                    
+                                    <input style="font-size: 15px;"  class="form-control" id="date2" name="date2" placeholder="MM/DD/YYY" type="datetime-local"/>
+
+                            </div>
+                            </div>
+                        </br> 
+                            <button type="submit" class="btn btn-danger" style="  margin:auto;
+                            display:block;">Submit</button>
+                    
+                        </form>
+                       </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card" style="height: 650px; !important">
+                        
+                        <div >
+                        </br>
+                            <h4 style="text-align: center;color:#BB2D3B;font-weight: bold;">Results</h4>
+                        </div>
+                    </br></br>
+                                <div id="chart" class="chart"></div>
+                        </div>
+                              <!-- statics-->
+                    </div>
                 </div>
-                <div id="innerText">Loading</div>
-            </div>
+            
+           
+           
+            
 
-            <script>
-                function reset(){
-                $("#loading").removeClass("done").attr("onClick", "").children("#innerText").unbind('mouseenter mouseleave').html("Loading");
-                setTimeout(function(){complete()}, (Math.floor(Math.random() * 30000000) + 500));   
-            }
-            
-            reset();
-            
-            function complete(){
-                $("#loading").addClass("done").children("div").each(function(){
-                    $(this).attr("onClick", "reset();");
-                });
-                $("#loading>#innerText").fadeOut(function(){
-                    $(this).html("Models trained successfully").fadeIn(function(){
-                        $("#loading>#innerText").hover(function(){
-                            loadingButtonHover($(this));
-                        })
-                        $("#loading>div>svg>#border").hover(function(){
-                            loadingButtonHover($(this));
-                        })
-                    });
-                });
-            }
-            
-            //hardcoded hover effect on loading/start button
-            function loadingButtonHover(element){
-                $("#loading>div>svg>#border").addClass("hovered");
-                $("#loading>#innerText").addClass("hovered");
-                element.mouseout(function(){
-                    $("#loading>div>svg>#border").removeClass("hovered");
-                    $("#loading>#innerText").removeClass("hovered");
-                })
-            }
-
-            </script>
-            
             
         </main>
 
@@ -173,5 +209,11 @@
         <script src="/static/js/main.js"></script>
     </body>
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graph = {{graphJSON | safe}};
+        Plotly.plot("chart",graph,{});
+        
+    </script>
 
 </html>
