@@ -14,6 +14,6 @@ Prédiction de la consommation de gaz et d'électricité d'un bâtiment intellig
 
  
  2. Déploiment: 
- Le LSTM a était déployé sur une API REST développé avec FLASK. L'interface utilisateur et elle développe avec HTML, CSS et JS, elle permet de visualiser les résultats de la prédiction.
+ Le LSTM a était déployé sur une API REST développé avec FLASK. L'interface utilisateur est développée avec HTML, CSS et JS, elle permet de visualiser les résultats de la prédiction.
   
   
