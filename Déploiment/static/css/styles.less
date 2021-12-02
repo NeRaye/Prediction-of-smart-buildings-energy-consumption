@@ -1,0 +1,55 @@
+$color : #3aa9be
+$font :  100% Roboto
+
+@keyframes loading
+    0%
+        transform: rotate(-135deg)
+    100%
+        transform: rotate(225deg)
+    
+@keyframes show100
+    0%
+        stroke-dashoffset: 320
+        stroke-dasharray: 400
+    75%
+        stroke-dashoffset: 0
+        stroke-dasharray: 400
+    100%
+        stroke-dashoffset: 0
+        stroke-dasharray: 535
+    
+#loading
+    position: absolute
+    width: 105px
+    height: 105px
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    font: $font
+    svg
+        animation: loading 2s infinite
+        transform: rotate(-135deg)
+        margin-top: 3px
+    #border
+        fill: rgba(0,0,0,0)
+        stroke: $color
+        stroke-width: 4
+        stroke-dasharray: 400
+        stroke-dashoffset: 320
+    div
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        color: $color
+#loading.done
+    svg
+        -webkit-animation-play-state: paused
+    #border
+        animation: show100 2s forwards
+    #border.hovered
+        fill: $color
+        cursor: pointer
+    #innerText.hovered
+        color: white
+        cursor: pointer
