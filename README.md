@@ -10,7 +10,7 @@ Prédiction de la consommation de gaz et d'électricité d'un bâtiment intellig
   
   Pour la régression les modèles de régression linéaire multiple, SVM (kernel linéaire, polynomiale et RGB) et les forêts aléatoires ont été implémentés avec la bibliothèque scikit-learn.  Pour la prévision des séries temporelles, le modèle statistique ARIMA a été implémenté avec la bibliothéques statsmodels et le réseau de neurones LSTM avec le framework Keras.
   
-  La sélection d'attribut a été faite avec la méthode Sequential Feature Sélection (SFS). Les choix des hyperparamètres optimaux été font avec un algorithme de recherche sur grille en se basant sur le résultat de la validation croisée.
+  La sélection d'attribut a été faite avec la méthode Sequential Feature Sélection (SFS). Le choix des hyperparamètres optimaux été font avec un algorithme de recherche sur grille en se basant sur le résultat de la validation croisée.
 
  
  2. Déploiment: 
